@@ -14,6 +14,8 @@ mongoose.connect(MONGODB_URI, {
     useFindAndModify: false
 })
 
+
+//Connection error/success
 db.on('error', (err)=> console.log(err.message + ' is Mongod not running?'))
 db.on('connected', ()=> console.log('mongo connected: ', MONGODB_URI))
 db.on('disconnected', ()=> console.log('mongo disconnected'))
@@ -23,12 +25,17 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(methodOverride('_method'))
 
+//Controllers
+const userController = require('./controllers/users_controller.js')
+app.use('/users', userController)
+
+//Routes
 app.get('/', (req, res)=>{
     res.render('home.ejs')
 })
 
 app.get('/index', (req, res)=>{
-    app.render('index.ejs')
+    res.render('index.ejs')
 })
 
 app.listen(PORT, ()=>{
