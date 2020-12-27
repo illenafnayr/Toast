@@ -24,7 +24,11 @@ app.use(express.json())
 app.use(methodOverride('_method'))
 
 app.get('/', (req, res)=>{
-    res.render('index.ejs')
+    res.render('home.ejs')
+})
+
+app.get('/index', (req, res)=>{
+    app.render('index.ejs')
 })
 
 app.listen(PORT, ()=>{
