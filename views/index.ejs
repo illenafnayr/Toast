@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src https://apis.google.com; child-src 'none'; object-src 'none'">
-
-    <meta http-equiv="Content-Security-Policy" content="default-src https://code.jquery.com/jquery-3.5.1.min.js; child-src 'none'; object-src 'none'">
-
-    <meta http-equiv="Content-Security-Policy" content="default-src https://maps.googleapis.com/maps/api/js?key=AIzaSyDLgjoHNRoaghy5VMnw2qmYoFob_OTTyzo; child-src 'none'; object-src 'none'">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -26,17 +20,13 @@
                     <input type="submit" value="Log Out">
                 </form>
                <% } else { %>
-
                 <a href="/users/new">
                     <h1>sign up</h1>
                 </a>
-        
                 <a href="/sessions/new">
                     <h1>Log In</h1>
                 </a>
-
                <% } %>
-
         </nav>
     </header>
 
@@ -44,5 +34,12 @@
 
     <div id="map">
     </div>
+    
+    <div id="destinations">
+        <h1>Your destinations</h1>
+    </div>
+
+
+
 </body>
 </html>
