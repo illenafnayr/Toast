@@ -11,7 +11,7 @@
 // console.log(lat, lng);
 
 
-
+let destinations = []
 
 
 
@@ -25,7 +25,6 @@ $(()=>{
         const geocoder = new google.maps.Geocoder()
     
         //listen for click on map
-        
         google.maps.event.addListener(map, 'click', (event)=>{
             console.log(event.latLng);
             addMarker(event.latLng)
@@ -35,7 +34,10 @@ $(()=>{
               (results, status)=>{
                 if (status == google.maps.GeocoderStatus.OK) {
                   if (results[0]) {
-                    alert(results[0].formatted_address);
+                    console.log(results[0])
+                    console.log(results[0].formatted_address);
+                    destinations.push(results[0].formatted_address)
+                    console.log(destinations)
                   }
                 }
             })
@@ -51,8 +53,8 @@ $(()=>{
         '<fieldset>' +
         '<legend>Create New Product</legend>' +
         '<form action = "/store/allProducts" method="POST">' +
-            '<label for="name">Name:</label>' +
-            '<input id="name" name="name" type="text"><br>' +
+            '<label for="address">Address:</label>' +
+            '<input id="address" name="address" type="text" value="<%=results[0].formatted_address%>"><br>' +
             
             '<label for="description">Description:</label>' +
             '<input id="description" name="description" type="text"><br>' +
@@ -73,19 +75,9 @@ $(()=>{
         '</form>' +
     '</fieldset>'
 
-        let infoWindow = new google.maps.InfoWindow({
-            content: form
-        })
-    
-        // marker.addListener('click', ()=>{
-        //     infoWindow.open(map, marker)
-        // })
-    
-        //Add Marker Function
-    
-        // let infoWindow = new google.maps.InfoWindow({
-        //     content: '<h1>Hello World!</h1>'
-        // })
+
+
+        let yourLocation = new google.maps.InfoWindow
     
         const addMarker = (coords)=>{
             let marker = new google.maps.Marker({
@@ -94,6 +86,16 @@ $(()=>{
             })
     
             marker.addListener("click", () => {
+
+                let infoWindow = new google.maps.InfoWindow({
+                    content: destinations[destinations.length-1] + 
+                    '<br/><form action = "/index" method="POST">'+
+                    '<label for="address">Address: </label>' +
+                    '<input id="address" name="address" type="text" value="'+destinations[destinations.length-1]+'"><br>' +
+                    '<input id="form" type="submit" value="Add Destination">' +
+                    '</form>'
+                })
+
                 infoWindow.open(map, marker);
               });
         }
@@ -104,9 +106,9 @@ $(()=>{
                   lat: position.coords.latitude,
                   lng: position.coords.longitude,
                 };
-                infoWindow.setPosition(pos);
-                infoWindow.setContent("Your Location");
-                infoWindow.open(map);
+                yourLocation.setPosition(pos);
+                yourLocation.setContent("Your Location");
+                yourLocation.open(map);
                 map.setCenter(pos);
               },
               () => {
@@ -117,7 +119,8 @@ $(()=>{
             // Browser doesn't support Geolocation
             handleLocationError(false, infoWindow, map.getCenter());
           }
+        setTimeout(function(){yourLocation.close();}, '10000');  
+          
     }
-    
     google.maps.event.addDomListener(window, 'load', initMap);
 })

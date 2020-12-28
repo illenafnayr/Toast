@@ -5,6 +5,7 @@ const app = express()
 const db = mongoose.connection
 const session = require('express-session')
 require('dotenv').config()
+const Destination = require('./models/destinations.js')
 
 
 const PORT = process.env.PORT || 3003
@@ -47,9 +48,18 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/index', (req, res)=>{
-    res.render('index.ejs', {
-        currentUser: req.session.currentUser
-    }) 
+    Destination.find({}, (err, data)=>{
+        res.render('index.ejs', {
+            currentUser: req.session.currentUser,
+            destinations: data
+        }) 
+    })
+})
+
+app.post('/index', (req, res)=>{
+    Destination.create(req.body)
+    // res.send(req.body)
+    res.redirect('/index')
 })
 
 app.listen(PORT, ()=>{
