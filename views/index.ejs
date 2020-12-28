@@ -12,7 +12,30 @@
     <script src="app.js"></script>
 </head>
 <body>
+    <header>
+        <nav>
+            <% if (currentUser) { %>
+                <h1>Welcome, <%= currentUser.username %> </h1>
+                <form action="/sessions?_method=DELETE" method="POST">
+                    <input type="submit" value="Log Out">
+                </form>
+               <% } else { %>
+
+                <a href="/users/new">
+                    <h1>sign up</h1>
+                </a>
+        
+                <a href="/sessions/new">
+                    <h1>Log In</h1>
+                </a>
+
+               <% } %>
+
+        </nav>
+    </header>
+
     <h1>My Map</h1>
+
     <div id="map">
     </div>
 </body>

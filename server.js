@@ -41,11 +41,15 @@ app.use('/sessions', sessionsController)
 
 //Routes
 app.get('/', (req, res)=>{
-    res.render('home.ejs')
+    res.render('home.ejs', {
+        currentUser: req.session.currentUser
+    })
 })
 
 app.get('/index', (req, res)=>{
-    res.render('index.ejs')
+    res.render('index.ejs', {
+        currentUser: req.session.currentUser
+    }) 
 })
 
 app.listen(PORT, ()=>{
