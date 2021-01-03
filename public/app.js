@@ -9,12 +9,7 @@
 // });
 
 // console.log(lat, lng);
-
-
 let destinations = []
-
-
-
 $(()=>{
     const initMap = ()=>{
         const map = new google.maps.Map(document.getElementById('map'), {
@@ -43,39 +38,6 @@ $(()=>{
             })
         })
         
-        // let marker = new google.maps.Marker({
-        //     position: { lat: 45, lng: -75 },
-        //     map: map
-        // })
-        
-        let form =  
-        
-        '<fieldset>' +
-        '<legend>Create New Product</legend>' +
-        '<form action = "/store/allProducts" method="POST">' +
-            '<label for="address">Address:</label>' +
-            '<input id="address" name="address" type="text" value="<%=results[0].formatted_address%>"><br>' +
-            
-            '<label for="description">Description:</label>' +
-            '<input id="description" name="description" type="text"><br>' +
-
-            '<label for="category">Category:</label>' +
-            '<input id="category" name="category" type="text" placeholder="\'hardgoods\' or \'softgoods\'"><br>' +
-
-            '<label for="img">Image Source:</label>' +
-            '<input id="img" name="img" type="text"><br>' +
-
-            '<label for="price">Price:</label>' +
-            '<input id="price" name="price" type="number" placeholder="e.g., 59.99"><br>' +
-
-            '<label for="qty">Quantity:</label>' +
-            '<input id="qty" name="qty" type="number"><br>' +
-
-            '<input id="form" type="submit" value="Create Product">' +
-        '</form>' +
-    '</fieldset>'
-
-
 
         let yourLocation = new google.maps.InfoWindow
     
@@ -88,17 +50,19 @@ $(()=>{
             marker.addListener("click", () => {
 
                 let infoWindow = new google.maps.InfoWindow({
-                    content: destinations[destinations.length-1] + 
+                    content:
                     '<br/><form action = "/index" method="POST">'+
                     '<label for="address">Address: </label>' +
-                    '<input id="address" name="address" type="text" value="'+destinations[destinations.length-1]+'"><br>' +
+                    '<input id="destinations" name="destinations" type="text" value="'+destinations[destinations.length-1]+'"><br>' +
                     '<input id="form" type="submit" value="Add Destination">' +
                     '</form>'
                 })
-
                 infoWindow.open(map, marker);
               });
         }
+
+
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
               (position) => {

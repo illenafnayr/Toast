@@ -6,6 +6,7 @@ const db = mongoose.connection
 const session = require('express-session')
 require('dotenv').config()
 const Destination = require('./models/destinations.js')
+const User = require('./models/users.js')
 
 
 const PORT = process.env.PORT || 3003
@@ -47,20 +48,31 @@ app.get('/', (req, res)=>{
     })
 })
 
+
 app.get('/index', (req, res)=>{
-    Destination.find({}, (err, data)=>{
-        res.render('index.ejs', {
-            currentUser: req.session.currentUser,
-            destinations: data
-        }) 
+    res.render('index.ejs', {
+        currentUser: req.session.currentUser,
     })
 })
 
+
+// app.get('/index', (req, res)=>{
+//     Destination.find({}, (err, data)=>{
+//         res.render('index.ejs', {
+//             destinations: data,
+//             currentUser: req.session.currentUser
+//         }) 
+//     })
+// })
+
+
 app.post('/index', (req, res)=>{
-    Destination.create(req.body)
-    // res.send(req.body)
-    res.redirect('/index')
+    User.findOneAndUpdate({username: req.session.currentUser.username}, { $addToSet: { destinations: req.body.destinations}}, {new: true}, (err, foundUser)=>{
+        res.redirect('/index')
+    })
 })
+
+
 
 app.listen(PORT, ()=>{
     console.log('listening on port: ', PORT)

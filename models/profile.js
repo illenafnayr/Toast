@@ -21,6 +21,7 @@ const profileSchema = new mongoose.Schema({
             location: {type: String}
         }
     },
+    targetDestinations: [String]
 })
 
 const Profile = mongoose.model('Profile', profileSchema)

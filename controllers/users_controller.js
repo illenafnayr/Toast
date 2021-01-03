@@ -9,11 +9,13 @@ users.get('/new', (req, res)=>{
 
 users.post('/', (req, res)=>{
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-    console.log(req.body)
+    // console.log(req.body)
     User.create(req.body, (err, createdUser)=>{
         console.log('The user was created: ', createdUser)
-        res.redirect('/index')
+        res.redirect('/')
     })
 })
+
+
 
 module.exports = users

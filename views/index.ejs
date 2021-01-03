@@ -29,19 +29,18 @@
                <% } %>
         </nav>
     </header>
-
     <h1>My Map</h1>
 
     <div id="map">
     </div>
-    
+
     <div id="destinations">
-        <h1>Your destinations</h1>
-        <ul>
-            <% for( let i = 0; i < destinations.length; i++ ) { %>
-                <li><%= destinations[i].address %></li>
-            <% } %>    
-        </ul>
+        <% for( let i = 0; i < currentUser.destinations.length; i++ ) { %>
+            <a href="#"><%= currentUser.destinations %> </a></br>
+        <% } %>
     </div>
+
+
+
 </body>
 </html>
