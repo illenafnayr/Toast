@@ -52,9 +52,14 @@
     </form>
 
     <h1>Your Images</h1>
+    <div>
 
+    </div>
     <% for( let i = 0; i < images.length; i++ ) { %>
+        <div class="imgs">
+            <h2><%= images[i].title %></h2>
             <img src="<%= images[i].imgsrc %> " alt="<%= images[i].title %> ">
+        </div>
     <% } %>
 
 </body>

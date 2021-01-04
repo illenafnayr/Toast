@@ -58,6 +58,15 @@ app.get('/', (req, res)=>{
     })
 });
 
+app.get('/:id', (req, res)=>{
+    Image.findById(req.params.id, (err, data)=>{
+        res.render('show.ejs',{
+            currentUser: req.session.currentUser,
+            image: data
+        })
+    })
+})
+
 
 app.get('/index', isAuthenticated, (req, res)=>{
     Image.find({username: req.session.currentUser.username}, (err, data)=>{
