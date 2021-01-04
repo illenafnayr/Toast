@@ -1,0 +1,13 @@
+* {
+    color: blueviolet;
+}
+
+.header {
+    display: inline;
+}
+
+nav {
+    background-color: rgba(123, 123, 123, 0.5);
+    display: flex;
+    justify-content: space-around;
+}

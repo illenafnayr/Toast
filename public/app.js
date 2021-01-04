@@ -51,17 +51,18 @@ $(()=>{
 
                 let infoWindow = new google.maps.InfoWindow({
                     content:
-                    '<br/><form action = "/index" method="POST">'+
+                    '<br/><form action = "/index?_method=PUT" method="POST">'+
                     '<label for="address">Address: </label>' +
                     '<input id="destinations" name="destinations" type="text" value="'+destinations[destinations.length-1]+'"><br>' +
                     '<input id="form" type="submit" value="Add Destination">' +
                     '</form>'
                 })
                 infoWindow.open(map, marker);
+
+                $('#destinations').append('<a>'+destinations[destinations.length - 1]+'</a>')
+
               });
         }
-
-
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
