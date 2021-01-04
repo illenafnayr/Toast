@@ -8,7 +8,9 @@
 <body>
     <img src="<%= image.imgsrc %> " alt="<%= image.title %> ">
     <div>
-        display 3 other images with matching tags here
+        <% for( let i = 0; i < allImages.length; i++ ) { %>
+            <img src="<%= allImages[i].imgsrc %> " alt="allImages[i].title">
+        <% } %>
     </div>
 </body>
 </html>

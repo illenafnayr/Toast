@@ -91,10 +91,12 @@ app.post('/', (req, res)=>{
 
 app.get('/:id', (req, res)=>{
     Image.findById(req.params.id, (err, data)=>{
-        console.log(data);
-        res.render('show.ejs', {
-            currentUser: req.session.currentUser,
-            image: data
+        Image.find({}, (err, allImages)=>{
+            res.render('show.ejs', {
+                currentUser: req.session.currentUser,
+                image: data,
+                allImages: allImages
+            })
         })
     })
 })
