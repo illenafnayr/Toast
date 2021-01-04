@@ -9,7 +9,11 @@
     <img src="<%= image.imgsrc %> " alt="<%= image.title %> ">
     <div>
         <% for( let i = 0; i < allImages.length; i++ ) { %>
-            <img src="<%= allImages[i].imgsrc %> " alt="allImages[i].title">
+            <% for( let j = 0; j < allImages[i].tags.length; j++ ) { %>
+                <% if (image.tags.includes(allImages[i].tags[j]) && allImages[i].title !== image.title) { %>
+                    <img src="<%= allImages[i].imgsrc %> " alt="allImages[i].title">
+                <% } %>
+            <% } %>
         <% } %>
     </div>
 </body>
