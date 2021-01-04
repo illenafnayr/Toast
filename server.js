@@ -60,8 +60,11 @@ app.get('/', (req, res)=>{
 
 
 app.get('/index', isAuthenticated, (req, res)=>{
-    res.render('index.ejs', {
-        currentUser: req.session.currentUser,
+    Image.find({username: req.session.username}, (err, data)=>{
+        res.render('index.ejs', {
+            currentUser: req.session.currentUser,
+            images: data
+        })
     })
 });
 

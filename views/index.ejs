@@ -51,5 +51,11 @@
         <input type="submit" value="Submit">
     </form>
 
+    <h1>Your Images</h1>
+
+    <% for( let i = 0; i < images.length; i++ ) { %>
+            <img src="<%= images[i].imgsrc %> " alt="<%= images[i].title %> ">
+    <% } %>
+
 </body>
 </html>
