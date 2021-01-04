@@ -30,8 +30,17 @@
         </nav>
     </header>
 
-    <% for( let i = 0; i < images.length; i++ ) { %>
-        <h1><%= images[i].title %> </h1>
-    <% } %>
+    <div id="main">
+
+        <% if (images[0]) { %>
+            <% let i = Math.floor(Math.random() * images.length) %> 
+            <%= images[i].title %>
+            <img src="<%= images[i].imgsrc %> " alt="<%= images[i].title %> "> 
+        <% } else { %>
+            <h1>Nothing to see here</h1>
+        <% } %>
+
+
+    </div>
 </body>
 </html>
