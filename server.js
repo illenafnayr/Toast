@@ -49,24 +49,15 @@ const sessionsController = require('./controllers/sessions_controller.js')
 app.use('/sessions', sessionsController)
 
 //Routes
-app.get('/', (req, res)=>{
-    Image.find({}, (err, data)=>{
-        res.render('home.ejs', {
-            images: data,
-            currentUser: req.session.currentUser
-        });
-    })
-});
 
-app.get('/:id', (req, res)=>{
+app.get('/index/:id/edit', isAuthenticated, (req, res)=>{
     Image.findById(req.params.id, (err, data)=>{
-        res.render('show.ejs',{
+        res.render('edit.ejs', {
             currentUser: req.session.currentUser,
             image: data
         })
     })
 })
-
 
 app.get('/index', isAuthenticated, (req, res)=>{
     Image.find({username: req.session.currentUser.username}, (err, data)=>{
@@ -74,6 +65,16 @@ app.get('/index', isAuthenticated, (req, res)=>{
             currentUser: req.session.currentUser,
             images: data
         })
+    })
+});
+
+
+app.get('/', (req, res)=>{
+    Image.find({}, (err, data)=>{
+        res.render('home.ejs', {
+            images: data,
+            currentUser: req.session.currentUser
+        });
     })
 });
 
@@ -87,6 +88,18 @@ app.post('/', (req, res)=>{
         }
     })
 })
+
+app.get('/:id', (req, res)=>{
+    Image.findById(req.params.id, (err, data)=>{
+        console.log(data);
+        res.render('show.ejs', {
+            currentUser: req.session.currentUser,
+            image: data
+        })
+    })
+})
+
+
 
 
 // app.put('/index', (req, res)=>{
