@@ -34,8 +34,10 @@
 
         <% if (images[0]) { %>
             <% let i = Math.floor(Math.random() * images.length) %> 
-            <a href="/<%= images[i].id %> "><%= images[i].title %></a>
-            <img src="<%= images[i].imgsrc %> " alt="<%= images[i].title %> "> 
+            <h1><%= images[i].title %></h1>
+            <a href="/<%= images[i].id %> ">
+                <img src="<%= images[i].imgsrc %> " alt="<%= images[i].title %> "> 
+            </a>
         <% } else { %>
             <h1>Nothing to see here</h1>
         <% } %>

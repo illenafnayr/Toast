@@ -11,7 +11,9 @@
         <% for( let i = 0; i < allImages.length; i++ ) { %>
             <% for( let j = 0; j < allImages[i].tags.length; j++ ) { %>
                 <% if (image.tags.includes(allImages[i].tags[j]) && allImages[i].title !== image.title) { %>
-                    <img src="<%= allImages[i].imgsrc %> " alt="allImages[i].title">
+                    <a href="/<%= allImages[i].id %>">
+                        <img src="<%= allImages[i].imgsrc %> " alt="allImages[i].title">
+                    </a>
                 <% } %>
             <% } %>
         <% } %>
