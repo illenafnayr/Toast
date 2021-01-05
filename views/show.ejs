@@ -6,13 +6,26 @@
     <img src="<%= image.imgsrc %> " alt="<%= image.title %>">
     <p><%= image.tags %></p>
     <div id="similarImages">
-        <% for( let i = 0; i < allImages.length; i++ ) { %>
-            <% if (image.tags.some(j=>allImages[i].tags.includes(j)) && image.imgsrc !== allImages[i].imgsrc) { %>
-            <a href="/<%= allImages[i].id %>">
-                <img src="<%= allImages[i].imgsrc %> " alt="">
-            </a>
-            <% } %>
-        <% } %>
+        <%const shuffle = (array) => {
+            for (var i = array.length - 1; i > 0; i--) {
+              var j = Math.floor(Math.random() * (i + 1));
+              var temp = array[i];
+              array[i] = array[j];
+              array[j] = temp;
+            }
+            return array;
+        } %>
+            <% for( let i = 0; i < allImages.length; i++ ) { %>
+
+                <% shuffle(allImages[i].tags) %>
+
+                <% if (image.tags.some(j=>allImages[i].tags.includes(j)) && image.imgsrc !== allImages[i].imgsrc) { %>
+                <a href="/<%= allImages[i].id %>">
+                    <img src="<%= allImages[i].imgsrc %> " alt="">
+                    <p><%= allImages[i].tags %> </p>
+                </a>
+                <% } %>
+         <% } %>
     </div>
 </body>
 </html>
