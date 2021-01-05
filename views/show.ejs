@@ -3,15 +3,14 @@
     <%- include('./partials/head.ejs') %> 
 <body>
     <%- include('./partials/header.ejs') %> 
-    <img src="<%= image.imgsrc %> " alt="<%= image.title %> ">
-    <div>
+    <img src="<%= image.imgsrc %> " alt="<%= image.title %>">
+    <p><%= image.tags %></p>
+    <div id="similarImages">
         <% for( let i = 0; i < allImages.length; i++ ) { %>
-            <% for( let j = 0; j < allImages[i].tags.length; j++ ) { %>
-                <% if (image.tags.includes(allImages[i].tags[j]) && allImages[i].title !== image.title) { %>
-                    <a href="/<%= allImages[i].id %>">
-                        <img src="<%= allImages[i].imgsrc %> " alt="allImages[i].title">
-                    </a>
-                <% } %>
+            <% if (image.tags.some(j=>allImages[i].tags.includes(j)) && image.imgsrc !== allImages[i].imgsrc) { %>
+            <a href="/<%= allImages[i].id %>">
+                <img src="<%= allImages[i].imgsrc %> " alt="">
+            </a>
             <% } %>
         <% } %>
     </div>

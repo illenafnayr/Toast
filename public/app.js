@@ -89,3 +89,16 @@ $(()=>{
     }
     google.maps.event.addDomListener(window, 'load', initMap);
 })
+
+<div id="similarImages">
+<% for( let i = 0; i < allImages.length; i++ ) { %>
+    <% for( let j = 0; j < allImages[i].tags.length; j++ ) { %>
+        <% if (image.tags.includes(allImages[i].tags[j]) && allImages[i].title !== image.title) { %>
+            <a href="/<%= allImages[i].id %>">
+                <img src="<%= allImages[i].imgsrc %> " alt="<%= allImages[i].title %>">
+                <p><%= allImages[i].tags %> </p>
+            </a>
+            
+        <% } %>
+    <% } %>
+<% } %>

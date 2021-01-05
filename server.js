@@ -34,6 +34,9 @@ app.use(session({
 }))
 
 //Controllers
+const seedController = require('./controllers/seed_controller.js')
+app.use('/seed', seedController)
+
 const userController = require('./controllers/users_controller.js')
 app.use('/users', userController)
 
