@@ -13,6 +13,11 @@ public.get('/', (req, res)=>{
     })
 });
 
+public.put('/:id', (req, res)=>{
+    Image.findByIdAndUpdate(req.params.id, { $inc: {'likes': 1 }}, {new: true}, (err, data)=>{
+        res.redirect('/'+req.params.id)
+    })
+})
 
 public.put('/:id', (req, res)=>{
     Image.findByIdAndUpdate( req.params.id, req.body, {new: true}, (err, data)=>{

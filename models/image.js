@@ -4,7 +4,8 @@ const imageSchema = new mongoose.Schema ({
     username: {type: String},
     title: { type: String, unique: true, required: true },
     imgsrc: { type: String, required: true},
-    tags: [{type: String}]
+    tags: [{type: String}],
+    likes: {type: Number}
 })
 
 //validate: {

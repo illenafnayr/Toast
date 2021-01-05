@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('./partials/head.ejs') %> 
+    <head>
+        <%- include('./partials/head.ejs') %>
+    </head>
 <body>
     <%- include('./partials/header.ejs') %> 
     <img src="<%= image.imgsrc %> " alt="<%= image.title %>">
+    <p>Likes: <%= image.likes %> </p>
+    <form action="/<%=image.id%>?_method=PUT" method="POST">
+        <input type="submit" value="Like">
+    </form>
     <p><%= image.tags %></p>
     <div id="similarImages">
+        
         <%const shuffle = (array) => {
             for (var i = array.length - 1; i > 0; i--) {
               var j = Math.floor(Math.random() * (i + 1));
@@ -14,7 +21,8 @@
               array[j] = temp;
             }
             return array;
-        } %>
+            } %>
+
             <% for( let i = 0; i < allImages.length; i++ ) { %>
 
                 <% shuffle(allImages[i].tags) %>
@@ -23,6 +31,7 @@
                 <a href="/<%= allImages[i].id %>">
                     <img src="<%= allImages[i].imgsrc %> " alt="">
                     <p><%= allImages[i].tags %> </p>
+                    <p>likes: <%= allImages[i].likes%></p>
                 </a>
                 <% } %>
          <% } %>
