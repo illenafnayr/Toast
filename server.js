@@ -1,3 +1,4 @@
+//Imports
 const express = require('express')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
@@ -5,10 +6,8 @@ const app = express()
 const db = mongoose.connection
 const session = require('express-session')
 require('dotenv').config()
-const User = require('./models/users.js')
-const Image = require('./models/image.js')
 
-
+//Config
 const PORT = process.env.PORT || 3003
 const MONGODB_URI = process.env.MONGODB_URI
 
@@ -17,7 +16,6 @@ mongoose.connect(MONGODB_URI, {
     useUnifiedTopology: true,
     useFindAndModify: false
 })
-
 
 //Connection error/success
 db.on('error', (err)=> console.log(err.message + ' is Mongod not running?'))
@@ -34,102 +32,22 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }))
-const isAuthenticated = (req, res, next) => {
-    if (req.session.currentUser) {
-      return next()
-    } else {
-      res.redirect('/sessions/new')
-    }
-  }
 
 //Controllers
 const userController = require('./controllers/users_controller.js')
 app.use('/users', userController)
+
 const sessionsController = require('./controllers/sessions_controller.js')
 app.use('/sessions', sessionsController)
 
-//Routes
+const indexController = require('./controllers/index_controller.js')
+app.use('/index', indexController)
 
-app.put('/:id', (req, res)=>{
-    Image.findByIdAndUpdate( req.params.id, req.body, {new: true}, (err, data)=>{
-        if (err) {
-            res.send(err + '<a href="/">Back to Home</a>')
-            console.log(err);
-        } else {
-            res.redirect('/index')
-        }
-    })
-})
-
-app.get('/index/:id/edit', isAuthenticated, (req, res)=>{
-    Image.findById(req.params.id, (err, data)=>{
-        res.render('edit.ejs', {
-            currentUser: req.session.currentUser,
-            image: data
-        })
-    })
-})
-
-app.get('/index', isAuthenticated, (req, res)=>{
-    Image.find({username: req.session.currentUser.username}, (err, data)=>{
-        res.render('index.ejs', {
-            currentUser: req.session.currentUser,
-            images: data
-        })
-    })
-});
+const publicController = require('./controllers/public_controller.js')
+app.use('/', publicController)
 
 
-app.get('/', (req, res)=>{
-    Image.find({}, (err, data)=>{
-        res.render('home.ejs', {
-            images: data,
-            currentUser: req.session.currentUser
-        });
-    })
-});
-
-app.post('/', (req, res)=>{
-    Image.create(req.body, (err, data)=>{
-        if (err) {
-            res.send(err + '<a href="/">Back to Home</a>')
-            console.log(err);
-        } else {
-            res.redirect('/')
-        }
-    })
-})
-
-app.get('/:id', (req, res)=>{
-    Image.findById(req.params.id, (err, data)=>{
-        Image.find({}, (err, allImages)=>{
-            res.render('show.ejs', {
-                currentUser: req.session.currentUser,
-                image: data,
-                allImages: allImages
-            })
-        })
-    })
-})
-
-app.delete('/index/:id', isAuthenticated, (req, res) => {
-    Image.findByIdAndRemove(req.params.id, (err, data) => {
-      res.redirect('/index')
-    })
-  })
-
-
-
-
-// app.put('/index', (req, res)=>{
-//     User.findOneAndUpdate({username: req.session.currentUser.username}, { $addToSet: { destinations: req.body.destinations}}, {new: true}, (err, foundUser)=>{
-//         res.redirect('/index', {
-//             currentUser: req.session.currentUser
-//         })
-//     });
-// });
-
-
+// Listening
 app.listen(PORT, ()=>{
     console.log('listening on port: ', PORT)
 });

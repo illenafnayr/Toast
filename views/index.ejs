@@ -4,7 +4,7 @@
 <body>
     <%- include('./partials/header.ejs') %> 
 
-    <form action="/" method="POST">
+    <form action="/index" method="POST">
         <input type="hidden" name="username" value="<%= currentUser.username %>">
         <input type="text" name="title" placeholder="title" id="">
         <input type="text" name="imgsrc" placeholder="image source" id="">
