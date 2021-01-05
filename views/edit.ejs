@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <%- include('./partials/head.ejs') %> 
 <body>
+    <%- include('./partials/header.ejs') %> 
     <img src="<%= image.imgsrc %> " alt="<%= image.title %> ">
     <div>
-        EDIT page
+        <form action="/<%= image.id %>?_method=PUT" method="POST">
+            <input type="hidden" name="username" value="<%= currentUser.username %>">
+            <input type="text" name="title" value="<%= image.title %> " id="">
+            <input type="text" name="imgsrc" value="<%= image.imgsrc %> " id="">
+            <% for( let i = 0; i < image.tags.length; i++ ) { %>
+                <input type="text" name="tags" value="<%= image.tags[i] %> " id="">
+            <% } %>
+            <input type="submit" value="Submit">
+        </form>
     </div>
 </body>
 </html>

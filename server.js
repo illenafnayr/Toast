@@ -50,6 +50,17 @@ app.use('/sessions', sessionsController)
 
 //Routes
 
+app.put('/:id', (req, res)=>{
+    Image.findByIdAndUpdate( req.params.id, req.body, {new: true}, (err, data)=>{
+        if (err) {
+            res.send(err + '<a href="/">Back to Home</a>')
+            console.log(err);
+        } else {
+            res.redirect('/index')
+        }
+    })
+})
+
 app.get('/index/:id/edit', isAuthenticated, (req, res)=>{
     Image.findById(req.params.id, (err, data)=>{
         res.render('edit.ejs', {
@@ -100,6 +111,12 @@ app.get('/:id', (req, res)=>{
         })
     })
 })
+
+app.delete('/index/:id', isAuthenticated, (req, res) => {
+    Image.findByIdAndRemove(req.params.id, (err, data) => {
+      res.redirect('/index')
+    })
+  })
 
 
 
