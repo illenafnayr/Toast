@@ -3,6 +3,7 @@ const express = require('express')
 const index = express.Router()
 const Image = require('../models/image.js')
 
+
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
       return next()
@@ -30,7 +31,16 @@ index.get('/', isAuthenticated, (req, res)=>{
 });
 
 index.post('/', isAuthenticated, (req, res)=>{
-    Image.create(req.body, (err, data)=>{
+    username = req.body.username
+    title = req.body.title
+    imgsrc = req.body.imgsrc
+    tags = req.body.tags.toString().replace(/\s/g, '').split(",")
+    Image.create({
+        username: username,
+        title: title,
+        imgsrc: imgsrc,
+        tags: tags
+    }, (err, data)=>{
         if (err) {
             res.send(err + '<a href="/">Back to Home</a>')
             console.log(err);
