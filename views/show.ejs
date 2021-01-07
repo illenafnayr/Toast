@@ -17,7 +17,7 @@
 
                 <div id="nav-2">
                     <span>Welcome, <%= currentUser.username %></span>
-                    <a href="/index">Upload Photo</a>
+                    <a href="/index">Your Profile</a>
                     <form action="/sessions?_method=DELETE" method="POST">
                         <input type="submit" value="Log Out" id="logout">
                     </form>
@@ -47,7 +47,7 @@
         <img id="mainimg" src="<%= image.imgsrc %> " alt="<%= image.title %>">
         <p>Likes: <%= image.likes %> </p>
         <form action="/<%=image.id%>?_method=PUT" method="POST">
-            <input type="submit" value="Like">
+            <input type="submit" value="Like" id="submit">
         </form>
         <p><%= image.tags %></p>
             
