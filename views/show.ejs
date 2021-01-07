@@ -4,37 +4,76 @@
         <%- include('./partials/head.ejs') %>
     </head>
 <body>
-    <%- include('./partials/header.ejs') %> 
-    <img src="<%= image.imgsrc %> " alt="<%= image.title %>">
-    <p>Likes: <%= image.likes %> </p>
-    <form action="/<%=image.id%>?_method=PUT" method="POST">
-        <input type="submit" value="Like">
-    </form>
-    <p><%= image.tags %></p>
-    <div id="similarImages">
-        
-        <%const shuffle = (array) => {
-            for (var i = array.length - 1; i > 0; i--) {
-              var j = Math.floor(Math.random() * (i + 1));
-              var temp = array[i];
-              array[i] = array[j];
-              array[j] = temp;
-            }
-            return array;
-            } %>
+    <header>
+        <nav>
+            <% if (currentUser) { %>
+                <div id="logo">
+                    <span>Toast</span></br>
+                    <img src="https://i.imgur.com/hDMkYYU.png" alt="toast" id="logoimg">
+                </div>
 
-            <% for( let i = 0; i < allImages.length; i++ ) { %>
+                <div id="nav-2">
+                    <span>Welcome, <%= currentUser.username %></span>
+                    <a href="/index">Upload Photo</a>
+                    <form action="/sessions?_method=DELETE" method="POST">
+                        <input type="submit" value="Log Out" id="logout">
+                    </form>
+                </div>
 
-                <% shuffle(allImages[i].tags) %>
+               <% } else { %>
 
-                <% if (image.tags.some(j=>allImages[i].tags.includes(j)) && image.imgsrc !== allImages[i].imgsrc) { %>
-                <a href="/<%= allImages[i].id %>">
-                    <img src="<%= allImages[i].imgsrc %> " alt="">
-                    <p><%= allImages[i].tags %> </p>
-                    <p>likes: <%= allImages[i].likes%></p>
-                </a>
-                <% } %>
-         <% } %>
+                <div id="logo">
+                    <span>Toast</span></br>
+                    <img src="https://i.imgur.com/hDMkYYU.png" alt="toast" id="logoimg">
+                </div>
+
+                <div id="nav">
+                    <a href="/users/new">
+                        <span>sign up</span>
+                    </a>
+                    <a href="/sessions/new">
+                        <span>Log In</span>
+                    </a>
+                </div>
+
+               <% } %>
+        </nav>
+    </header>
+
+    <div id="main">
+        <img id="mainimg" src="<%= image.imgsrc %> " alt="<%= image.title %>">
+        <p>Likes: <%= image.likes %> </p>
+        <form action="/<%=image.id%>?_method=PUT" method="POST">
+            <input type="submit" value="Like">
+        </form>
+        <p><%= image.tags %></p>
+            
+            <h1>Similar Images</h1>
+            <%const shuffle = (array) => {
+                for (var i = array.length - 1; i > 0; i--) {
+                  var j = Math.floor(Math.random() * (i + 1));
+                  var temp = array[i];
+                  array[i] = array[j];
+                  array[j] = temp;
+                }
+                return array;
+                } %>
+    
+                <% for( let i = 0; i < allImages.length; i++ ) { %>
+    
+                    <% shuffle(allImages[i].tags) %>
+    
+                    <% if (image.tags.some(j=>allImages[i].tags.includes(j)) && image.imgsrc !== allImages[i].imgsrc) { %>
+                    <div id="image">
+                        <a href="/<%= allImages[i].id %>">
+                        <img id="img" src="<%= allImages[i].imgsrc %> " alt="">
+                        <p><%= allImages[i].tags %> </p>
+                        <p>likes: <%= allImages[i].likes%></p>
+                    </a>
+                    </div>
+                    <% } %>
+             <% } %>
     </div>
+
 </body>
 </html>

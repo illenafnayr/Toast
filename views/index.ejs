@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%- include('./partials/head.ejs') %>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles/header.css">
+        <link rel="stylesheet" href="/styles/main.css">
+        <title>Document</title>
     </head>
 <body>
-    <%- include('./partials/header.ejs') %> 
-
-    <form action="/index" method="POST">
-        <input type="hidden" name="username" value="<%= currentUser.username %>">
-        <input type="text" name="title" placeholder="title" id="">
-        <input type="text" name="imgsrc" placeholder="image source" id="">
-        <input type="text" name="tags" placeholder="tags" id="">
-        <input type="submit" value="Submit">
-    </form>
-
-    <h1>Your Images</h1>
-    <div>
-
-    </div>
-    <% for( let i = 0; i < images.length; i++ ) { %>
-        <div class="imgs">
-            <h2><%= images[i].title %></h2>
-            <img src="<%= images[i].imgsrc %> " alt="<%= images[i].title %> ">
-            <button type="button" name="button"><a href="/index/<%=images[i].id%>/edit">Edit</a></button>
-            <form action="/index/<%=images[i]._id%>?_method=DELETE" method="POST">
-                <input type="submit" value="DELETE"/>
+    <nav>
+        <div id="logo">
+            <span>Toast</span></br>
+            <img src="https://i.imgur.com/hDMkYYU.png" alt="toast" id="logoimg">
+        </div>
+    
+        <div id="nav">
+            <span>Welcome, <%= currentUser.username %></span>
+            <form action="/sessions?_method=DELETE" method="POST">
+                <input type="submit" value="Log Out" id="logout">
             </form>
         </div>
-    <% } %>
+    </nav>
+
+    <div id="main">
+        <fieldset id="fieldset">
+            <legend>New Image</legend>
+            <form action="/index" method="POST">
+                <input type="hidden" name="username" value="<%= currentUser.username %>">
+                <input type="text" name="title" placeholder="title" id="">
+                <input type="text" name="imgsrc" placeholder="image source" id="">
+                <input type="text" name="tags" placeholder="tags" id="">
+                <input type="submit" value="Submit" id="submit">
+            </form>
+        </fieldset>
+
+        <h1>Your Images</h1>
+        <% for( let i = 0; i < images.length; i++ ) { %>
+            <div id="image">
+                <h2><%= images[i].title %></h2>
+                <img src="<%= images[i].imgsrc %> " alt="<%= images[i].title %> " id="img">
+                <button id="submit" type="button" name="button"><a href="/index/<%=images[i].id%>/edit">Edit</a></button>
+                <form action="/index/<%=images[i]._id%>?_method=DELETE" method="POST">
+                    <input type="submit" value="DELETE"/ id="submit">
+                </form>
+            </div>
+        <% } %>
+    </div>
 
 </body>
 </html>

@@ -18,7 +18,7 @@
                     <span>Welcome, <%= currentUser.username %></span>
                     <a href="/index">Upload Photo</a>
                     <form action="/sessions?_method=DELETE" method="POST">
-                        <input type="submit" value="Log Out">
+                        <input type="submit" value="Log Out" id="logout">
                     </form>
                 </div>
 
@@ -49,10 +49,11 @@
             <div id="image">
                 <h3><%= images[i].title %></h3>
                 <a href="/<%= images[i].id %>">
-                    <img src="<%= images[i].imgsrc %>" alt="<%= images[i].title %> "> 
+                    <img src="<%= images[i].imgsrc %>" alt="<%= images[i].title %>" id="img"> 
                 </a>
-                <button id="newImg">New Image</button>
+                <span><%= images[i].username%> </span>
             </div>
+            <button id="newImg">New Image</button>
             
         <% } else { %>
             <h1>Nothing to see here</h1>

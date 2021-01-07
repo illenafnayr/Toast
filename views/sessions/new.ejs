@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <%- include('../partials/head.ejs') %>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/styles/header.css">
+        <link rel="stylesheet" href="/styles/main.css">
+        <title>Document</title>
     </head> 
 <body>
-    <%- include('../partials/header.ejs') %> 
-    <fieldset>
-        <legend>Log In</legend>
-        <form action="/sessions" method="POST">
-            <label for="name">User Name:</label>
-            <input type="text" name="username" required/>
-            <label for="color">Password:</label>
-            <input type="password" name="password" />
-            <br>
-            <input type="submit" value="Submit">
-          <form>
-    </fieldset>
+    <nav>
+        <div id="logo">
+            <a href="/">
+                <span>Toast</span></br>
+                <img src="https://i.imgur.com/hDMkYYU.png" alt="toast" id="logoimg">
+            </a>
+        </div>
+    </nav>
+    <div id="main">
+        <fieldset>
+            <legend>Log In</legend>
+            <form action="/sessions" method="POST">
+                <label for="name">User Name:</label>
+                <input type="text" name="username" required/><br>
+                <label for="color">Password:</label>
+                <input type="password" name="password" />
+                <br>
+                <input type="submit" value="Submit" id="submit">
+              <form>
+        </fieldset>
+    </div>
 </body>
 </html>
