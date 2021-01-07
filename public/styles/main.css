@@ -61,3 +61,8 @@ fieldset {
 #fieldset{
   margin: 2.5%;
 }
+
+#similarImages {
+  display:contents;
+
+}
