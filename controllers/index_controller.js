@@ -13,7 +13,7 @@ const isAuthenticated = (req, res, next) => {
   }
 
 index.get('/:id/edit', isAuthenticated, (req, res)=>{
-    Image.findById(req.params.id, (err, data)=>{
+    Image.findByIdAndUpdate(req.params.id, (err, data)=>{
         res.render('edit.ejs', {
             currentUser: req.session.currentUser,
             image: data
