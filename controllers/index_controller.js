@@ -13,7 +13,7 @@ const isAuthenticated = (req, res, next) => {
   }
 
 index.get('/:id/edit', isAuthenticated, (req, res)=>{
-    Image.findByIdAndUpdate(req.params.id, (err, data)=>{
+    Image.findById(req.params.id, (err, data)=>{
         res.render('edit.ejs', {
             currentUser: req.session.currentUser,
             image: data
@@ -50,6 +50,12 @@ index.post('/', isAuthenticated, (req, res)=>{
     })
 })
 
+index.put('/:id', (req, res)=>{
+    id = req.params.id
+    Image.findByIdAndUpdate(req.params.id, req.body, {new: true}, (err, data)=>{
+        res.redirect('/' + id)
+    })
+})
 
 index.delete('/:id', isAuthenticated, (req, res) => {
     Image.findByIdAndRemove(req.params.id, (err, data) => {
