@@ -1,5 +1,7 @@
 # Toast
 
+# Hosted at https://damp-everglades-58234.herokuapp.com/
+
 # This is an app inspired by ffffound.com, a website where a user is recommended suggested images based on what their tastes. For this project, a random image from the database is displayed on the homepage as well as a button to generate a new image. If a user likes a particular image, they can click on it and it will bring them to another page that will show more information about the image as well as a list of similar images that show based on the tags associated with them. Each image can be liked as well, and this info is saved to the database.
 
 # This application is a C.R.U.D application built using node.js, mongodb/mongoose, and express.js. The database is a collection of users and images. If you sign up for an account you can upload images that will get displayed to the public.
