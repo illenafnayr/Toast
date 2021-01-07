@@ -46,6 +46,7 @@
     <div id="main">
         <img id="mainimg" src="<%= image.imgsrc %> " alt="<%= image.title %>">
         <p>Likes: <%= image.likes %> </p>
+        <h3><%= image.title %></h3>
         <form action="/<%=image.id%>?_method=PUT" method="POST">
             <input type="submit" value="Like" id="submit">
         </form>
@@ -70,6 +71,7 @@
                     <div id="image">
                         <a href="/<%= allImages[i].id %>">
                         <img id="img" src="<%= allImages[i].imgsrc %> " alt="">
+                        <h3><%= allImages[i].title %> </h3>
                         <p><%= allImages[i].tags %> </p>
                         <p>likes: <%= allImages[i].likes%></p>
                     </a>
