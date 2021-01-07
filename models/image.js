@@ -5,7 +5,7 @@ const imageSchema = new mongoose.Schema ({
     title: { type: String, unique: true, required: true },
     imgsrc: { type: String, required: true},
     tags: [{type: String}],
-    likes: {type: Number}
+    likes: {type: Number, default: 0}
 })
 
 //validate: {
