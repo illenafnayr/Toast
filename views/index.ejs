@@ -8,26 +8,26 @@
         <title>Document</title>
     </head>
 <body>
-    <nav>
+
+    <nav id="header">
         <div id="logo">
             <a href="/">
                 <span>Toast</span></br>
                 <img src="https://i.imgur.com/hDMkYYU.png" alt="toast" id="logoimg">
             </a>
         </div>
-    
-        <div id="nav">
-            <span>Welcome, <%= currentUser.username %></span>
-            <form action="/sessions?_method=DELETE" method="POST">
-                <input type="submit" value="Log Out" id="logout">
-            </form>
-        </div>
     </nav>
+    <div id="nav">
+        <span>Welcome, <%= currentUser.username %></span>
+        <form action="/sessions?_method=DELETE" method="POST">
+            <input type="submit" value="Log Out" id="logout">
+        </form>
+    </div>
 
     <div id="main">
         <fieldset id="fieldset">
             <legend>New Image</legend>
-            <form action="/index" method="POST">
+            <form action="/index" method="POST" id="newImg">
                 <input type="hidden" name="username" value="<%= currentUser.username %>">
                 <input type="text" name="title" placeholder="title" id="">
                 <input type="text" name="imgsrc" placeholder="image source" id="">

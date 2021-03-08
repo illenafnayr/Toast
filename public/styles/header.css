@@ -1,9 +1,9 @@
 nav {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center;
     justify-content: space-between;
-    height: 30vh;
+    height: 35vh;
 }
 
 #logo {
@@ -19,26 +19,32 @@ nav {
     border-radius: 5px;
 }
 
+
 #nav {
     width: 15%;
     display: flex;
-    align-items: space-around;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
-    font-size: 2rem;
+    font-size: 1.4rem;
+    margin: 0 auto;
 }
 
 #nav-2 {
     width: 30%;
+    /* height: 100px; */
     display: flex;
-    align-items: space-around;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
-    font-size: 2rem;
+    font-size: .95rem;
 }
 
 a {
     text-decoration: none;
     color: black;
     transition: 0.7s;
+    /* width: fit-content; */
 }
 
 a:hover {
@@ -65,3 +71,10 @@ button:hover, #logout:hover, #submit:hover{
       background-position:20vw;
     }
   }
+
+  @media only screen and (max-width: 320px) {
+
+    #nav-2 {
+        font-size: .7rem;
+    }
+}
